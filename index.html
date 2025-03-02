@@ -12,5 +12,24 @@
 <body>
     <h1>我的博客文章</h1>
     <p>这是一个关于技术的文章，介绍了如何使用 GitHub Pages 部署静态网站。</p>
+
+    <script src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+<script>
+wx.config({
+  appId: '你的AppID',
+  timestamp: '签名时间戳',
+  nonceStr: '随机字符串',
+  signature: '加密签名',
+  jsApiList: ['updateAppMessageShareData']
+});
+wx.ready(function() {
+  wx.updateAppMessageShareData({
+    title: '微信专用标题',  // 覆盖默认 OG 标题
+    desc: '微信专用描述',   // 覆盖默认 OG 描述
+    link: 'https://example.com/share?from=wechat',  // 带参数的分享链接
+    imgUrl: 'https://example.com/wechat-image.jpg'  // 微信专用图片
+  });
+});
+</script>
 </body>
 </html>
