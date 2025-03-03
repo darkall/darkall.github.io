@@ -1,8 +1,42 @@
-<head>
-  <title>页面标题</title>
-  <meta property="og:title" content="页面标题" />
-  <meta property="og:description" content="页面描述" />
-  <meta property="og:image" content="https://cdn.prod.website-files.com/65943d23dc44e6ce92eb6b67/65fb2de06abe3639bac78923_renter_listing_search-p-800.png" />
-  <meta property="og:url" content="https://darkall.github.io/" />
-  <meta property="og:type" content="website" />
-</head>
+<!-- 测试用二维码 -->
+        <div class="qr-code">
+            <p>扫描二维码在微信中打开</p>
+            <img src="https://quickchart.io/qr?text=https://你的域名.com/news/article-123" alt="测试二维码">
+        </div>
+    </div>
+
+    <script>
+        // 微信 JS-SDK 配置（需后端生成签名）
+        wx.config({
+            debug: false, // 生产环境关闭调试
+            appId: '2019112069224943', // 公众号AppID
+            timestamp: 1710000000, // 后端生成的时间戳（秒级）
+            nonceStr: 'LTAIKJs0Arp0gZaw', // 后端生成的随机串
+            signature: '签名信息', // 后端计算的签名
+            jsApiList: ['updateAppMessageShareData', 'updateTimelineShareData', 'scanQRCode']
+        });
+
+        // 微信分享自定义配置
+        wx.ready(() => {
+            // 自定义“发送给朋友”
+            wx.updateAppMessageShareData({
+                title: '分享标题：数字浪潮激荡正能量', // 覆盖 og:title
+                desc: '分享描述：点击查看2024中国正能量网络精品展播', // 覆盖 og:description
+                link: window.location.href,
+                imgUrl: 'https://inews.gtimg.com/om_bt/OeMcnleEyEQh7CMt8t4ny33AUJWrOAXrcj0FLn-CrL4rsAA/641'
+            });
+
+            // 自定义“分享到朋友圈”
+            wx.updateTimelineShareData({
+                title: '朋友圈标题：数字浪潮领航主旋律', // 朋友圈只显示标题
+                link: window.location.href,
+                imgUrl: 'https://inews.gtimg.com/om_bt/OeMcnleEyEQh7CMt8t4ny33AUJWrOAXrcj0FLn-CrL4rsAA/641'
+            });
+        });
+
+        // 错误处理
+        wx.error(res => {
+            console.error('微信 SDK 初始化失败:', res);
+            alert('分享功能暂不可用，请手动复制链接');
+        });
+    </script>
