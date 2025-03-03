@@ -52,23 +52,27 @@
     <script>
         // 微信 JS-SDK 配置（需后端生成签名）
         wx.config({
-            debug: false, // 生产环境关闭调试
-            appId: '2019112069224943', // 公众号AppID
+            debug: true, // 开启调试模式，便于查看错误信息
+            appId: 'YOUR_APP_ID', // 替换为你的公众号AppID
             timestamp: 1710000000, // 后端生成的时间戳（秒级）
-            nonceStr: 'LTAIKJs0Arp0gZaw', // 后端生成的随机串
-            signature: '签名信息', // 后端计算的签名
+            nonceStr: 'YOUR_NONCE_STR', // 后端生成的随机串
+            signature: 'YOUR_SIGNATURE', // 后端计算的签名
             jsApiList: ['updateAppMessageShareData', 'updateTimelineShareData']
         });
 
-        // 微信分享自定义配置
+        // 初始化配置完成回调
         wx.ready(() => {
+            console.log('微信 SDK 初始化成功');
+
             document.getElementById('shareToFriend').addEventListener('click', () => {
+                console.log('用户点击了“分享给朋友”按钮');
                 wx.updateAppMessageShareData({
                     title: '分享标题：数字浪潮激荡正能量', // 覆盖 og:title
                     desc: '分享描述：点击查看2024中国正能量网络精品展播', // 覆盖 og:description
                     link: window.location.href,
                     imgUrl: 'https://inews.gtimg.com/om_bt/OeMcnleEyEQh7CMt8t4ny33AUJWrOAXrcj0FLn-CrL4rsAA/641',
                     success: function () {
+                        console.log('成功调起微信分享给朋友');
                         alert('已成功调起微信分享给朋友');
                     },
                     fail: function (res) {
@@ -79,11 +83,13 @@
             });
 
             document.getElementById('shareToTimeline').addEventListener('click', () => {
+                console.log('用户点击了“分享到朋友圈”按钮');
                 wx.updateTimelineShareData({
                     title: '朋友圈标题：数字浪潮领航主旋律', // 朋友圈只显示标题
                     link: window.location.href,
                     imgUrl: 'https://inews.gtimg.com/om_bt/OeMcnleEyEQh7CMt8t4ny33AUJWrOAXrcj0FLn-CrL4rsAA/641',
                     success: function () {
+                        console.log('成功调起微信分享到朋友圈');
                         alert('已成功调起微信分享到朋友圈');
                     },
                     fail: function (res) {
@@ -95,7 +101,7 @@
         });
 
         // 错误处理
-        wx.error(res => {
+        wx.error(function(res) {
             console.error('微信 SDK 初始化失败:', res);
             alert('分享功能暂不可用，请手动复制链接');
         });
