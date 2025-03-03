@@ -26,6 +26,26 @@
     </style>
 </head>
 <body>
+
+	<button onclick="launchWechat()">打开微信添加好友</button>
+
+  <script>
+    function launchWechat() {
+      // 微信添加好友协议（示例：微信号为 test123）
+      const wechatUrl = 'weixin://dl/add?username=test123'; 
+
+      // 尝试调起微信
+      window.location.href = wechatUrl;
+
+      // 兼容性处理：若调起失败，跳转微信下载页
+      setTimeout(() => {
+        if (!document.hidden) {
+          window.location.href = 'https://weixin.qq.com/';
+        }
+      }, 2000);
+    }
+  </script>
+	
     <div class="content-article">
         <h1>中新网评：数字浪潮激荡正能量 云端聚力领航主旋律</h1>
         <div class="article-author">
