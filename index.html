@@ -21,8 +21,8 @@
             padding: 20px;
         }
         h1 { font-size: 24px; line-height: 1.5; }
-        .qr-code { text-align: center; margin: 30px 0; }
-        .qr-code img { width: 200px; height: 200px; }
+        .share-button { text-align: center; margin: 30px 0; }
+        .share-button button { padding: 10px 20px; font-size: 16px; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -42,10 +42,10 @@
             <img src="https://inews.gtimg.com/om_bt/OeMcnleEyEQh7CMt8t4ny33AUJWrOAXrcj0FLn-CrL4rsAA/641" alt="新闻配图" style="width:100%;border-radius:8px;">
         </div>
         
-        <!-- 测试用二维码 -->
-        <div class="qr-code">
-            <p>扫描二维码在微信中打开</p>
-            <img src="https://quickchart.io/qr?text=https://你的域名.com/news/article-123" alt="测试二维码">
+        <!-- 替换二维码为按钮 -->
+        <div class="share-button">
+            <button id="shareToFriend">分享给朋友</button>
+            <button id="shareToTimeline">分享到朋友圈</button>
         </div>
     </div>
 
@@ -57,24 +57,40 @@
             timestamp: 1710000000, // 后端生成的时间戳（秒级）
             nonceStr: 'LTAIKJs0Arp0gZaw', // 后端生成的随机串
             signature: '签名信息', // 后端计算的签名
-            jsApiList: ['updateAppMessageShareData', 'updateTimelineShareData', 'scanQRCode']
+            jsApiList: ['updateAppMessageShareData', 'updateTimelineShareData']
         });
 
         // 微信分享自定义配置
         wx.ready(() => {
-            // 自定义“发送给朋友”
-            wx.updateAppMessageShareData({
-                title: '分享标题：数字浪潮激荡正能量', // 覆盖 og:title
-                desc: '分享描述：点击查看2024中国正能量网络精品展播', // 覆盖 og:description
-                link: window.location.href,
-                imgUrl: 'https://inews.gtimg.com/om_bt/OeMcnleEyEQh7CMt8t4ny33AUJWrOAXrcj0FLn-CrL4rsAA/641'
+            document.getElementById('shareToFriend').addEventListener('click', () => {
+                wx.updateAppMessageShareData({
+                    title: '分享标题：数字浪潮激荡正能量', // 覆盖 og:title
+                    desc: '分享描述：点击查看2024中国正能量网络精品展播', // 覆盖 og:description
+                    link: window.location.href,
+                    imgUrl: 'https://inews.gtimg.com/om_bt/OeMcnleEyEQh7CMt8t4ny33AUJWrOAXrcj0FLn-CrL4rsAA/641',
+                    success: function () {
+                        alert('已成功调起微信分享给朋友');
+                    },
+                    fail: function (res) {
+                        console.error('分享给朋友失败:', res);
+                        alert('分享给朋友失败，请手动复制链接');
+                    }
+                });
             });
 
-            // 自定义“分享到朋友圈”
-            wx.updateTimelineShareData({
-                title: '朋友圈标题：数字浪潮领航主旋律', // 朋友圈只显示标题
-                link: window.location.href,
-                imgUrl: 'https://inews.gtimg.com/om_bt/OeMcnleEyEQh7CMt8t4ny33AUJWrOAXrcj0FLn-CrL4rsAA/641'
+            document.getElementById('shareToTimeline').addEventListener('click', () => {
+                wx.updateTimelineShareData({
+                    title: '朋友圈标题：数字浪潮领航主旋律', // 朋友圈只显示标题
+                    link: window.location.href,
+                    imgUrl: 'https://inews.gtimg.com/om_bt/OeMcnleEyEQh7CMt8t4ny33AUJWrOAXrcj0FLn-CrL4rsAA/641',
+                    success: function () {
+                        alert('已成功调起微信分享到朋友圈');
+                    },
+                    fail: function (res) {
+                        console.error('分享到朋友圈失败:', res);
+                        alert('分享到朋友圈失败，请手动复制链接');
+                    }
+                });
             });
         });
 
