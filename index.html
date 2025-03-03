@@ -2,34 +2,87 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>我的博客文章</title>
-    <meta property="og:title" content="我的博客文章" />
-    <meta property="og:description" content="这是一个关于技术的文章，介绍了如何使用 GitHub Pages 部署静态网站。" />
-    <meta property="og:image" content="https://cdn.prod.website-files.com/65943d23dc44e6ce92eb6b67/65fb2de06abe3639bac78923_renter_listing_search-p-800.png" />
-    <meta property="og:url" content="https://darkall.github.io" />
-    <meta property="og:type" content="article" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Open Graph 元标签（兜底用） -->
+    <meta property="og:title" content="中新网评：数字浪潮激荡正能量 云端聚力领航主旋律">
+    <meta property="og:description" content="2024中国正能量网络精品征集展播活动记录高光时刻，呈现大国崛起精神图谱">
+    <meta property="og:image" content="https://inews.gtimg.com/om_bt/OeMcnleEyEQh7CMt8t4ny33AUJWrOAXrcj0FLn-CrL4rsAA/641">
+    <meta property="og:url" content="https://你的域名.com/news/article-123">
+    
+    <!-- 微信 JS-SDK -->
+    <script src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
+    <title>新闻测试页</title>
+    
+    <style>
+        .content-article {
+            max-width: 800px;
+            margin: 20px auto;
+            padding: 20px;
+        }
+        h1 { font-size: 24px; line-height: 1.5; }
+        .qr-code { text-align: center; margin: 30px 0; }
+        .qr-code img { width: 200px; height: 200px; }
+    </style>
 </head>
 <body>
-    <h1>我的博客文章</h1>
-    <p>这是一个关于技术的文章，介绍了如何使用 GitHub Pages 部署静态网站。</p>
+    <div class="content-article">
+        <h1>中新网评：数字浪潮激荡正能量 云端聚力领航主旋律</h1>
+        <div class="article-author">
+            <img src="https://inews.gtimg.com/newsapp_bt/0/1128164013310_1586/0" alt="中国新闻网" style="width:36px;height:36px;border-radius:50%;margin-right:10px;">
+            <div>
+                <p style="margin:0;font-weight:bold;">中国新闻网</p>
+                <p style="margin:0;color:#666;">2025-03-02 09:18 发布于北京</p>
+            </div>
+        </div>
+        
+        <!-- 正文内容（示例节选） -->
+        <div class="rich_media_content">
+            <p>由中央网信办主办的2024中国正能量网络精品征集展播活动正稳步开展。活动以“改革开新局 奋斗创伟业”为主题，通过多元形式记录高光时刻、精彩瞬间...</p>
+            <img src="https://inews.gtimg.com/om_bt/OeMcnleEyEQh7CMt8t4ny33AUJWrOAXrcj0FLn-CrL4rsAA/641" alt="新闻配图" style="width:100%;border-radius:8px;">
+        </div>
+        
+        <!-- 测试用二维码 -->
+        <div class="qr-code">
+            <p>扫描二维码在微信中打开</p>
+            <img src="https://quickchart.io/qr?text=https://你的域名.com/news/article-123" alt="测试二维码">
+        </div>
+    </div>
 
-    <script src="https://res.wx.qq.com/open/js/jweixin-1.6.0.js"></script>
-<script>
-wx.config({
-  appId: '你的AppID',
-  timestamp: '签名时间戳',
-  nonceStr: '随机字符串',
-  signature: '加密签名',
-  jsApiList: ['updateAppMessageShareData']
-});
-wx.ready(function() {
-  wx.updateAppMessageShareData({
-    title: '微信专用标题',  // 覆盖默认 OG 标题
-    desc: '微信专用描述',   // 覆盖默认 OG 描述
-    link: 'https://darkall.github.io?from=wechat',  // 带参数的分享链接
-    imgUrl: 'https://cdn.prod.website-files.com/65943d23dc44e6ce92eb6b67/65fb2de06abe3639bac78923_renter_listing_search-p-800.png'  // 微信专用图片
-  });
-});
-</script>
+    <script>
+        // 微信 JS-SDK 配置（需后端生成签名）
+        wx.config({
+            debug: false, // 生产环境关闭调试
+            appId: '2019112069224943', // 公众号AppID
+            timestamp: 1710000000, // 后端生成的时间戳（秒级）
+            nonceStr: 'LTAIKJs0Arp0gZaw', // 后端生成的随机串
+            signature: '签名信息', // 后端计算的签名
+            jsApiList: ['updateAppMessageShareData', 'updateTimelineShareData', 'scanQRCode']
+        });
+
+        // 微信分享自定义配置
+        wx.ready(() => {
+            // 自定义“发送给朋友”
+            wx.updateAppMessageShareData({
+                title: '分享标题：数字浪潮激荡正能量', // 覆盖 og:title
+                desc: '分享描述：点击查看2024中国正能量网络精品展播', // 覆盖 og:description
+                link: window.location.href,
+                imgUrl: 'https://inews.gtimg.com/om_bt/OeMcnleEyEQh7CMt8t4ny33AUJWrOAXrcj0FLn-CrL4rsAA/641'
+            });
+
+            // 自定义“分享到朋友圈”
+            wx.updateTimelineShareData({
+                title: '朋友圈标题：数字浪潮领航主旋律', // 朋友圈只显示标题
+                link: window.location.href,
+                imgUrl: 'https://inews.gtimg.com/om_bt/OeMcnleEyEQh7CMt8t4ny33AUJWrOAXrcj0FLn-CrL4rsAA/641'
+            });
+        });
+
+        // 错误处理
+        wx.error(res => {
+            console.error('微信 SDK 初始化失败:', res);
+            alert('分享功能暂不可用，请手动复制链接');
+        });
+    </script>
 </body>
 </html>
